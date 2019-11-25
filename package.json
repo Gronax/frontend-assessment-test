@@ -20,6 +20,7 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.6.3",
+    "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.4",
@@ -40,6 +41,12 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
-    "core-js": "^3.3.3"
+    "axios": "^0.18.1",
+    "axios-cache-adapter": "^2.5.0",
+    "core-js": "^3.3.3",
+    "lightbox2": "^2.11.1",
+    "moment": "^2.24.0",
+    "swiper": "^5.2.1",
+    "vanilla-lazyload": "^12.4.0"
   }
 }

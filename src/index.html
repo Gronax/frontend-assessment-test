@@ -2,13 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>HolidayPirates Frontend test</title>
+    <link rel="stylesheet" async href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" async href="../node_modules/swiper/css/swiper.min.css">
+    <link rel="stylesheet" async href="../node_modules/lightbox2/dist/css/lightbox.min.css">
   </head>
   <body>
-    <h1>Welcome on board! ☠️</h1>
-    <p>
-      Show us your best frontend skills! Good luck and we are super excited
-      about the result!
-    </p>
+    <div class="container filter-container">
+      <select id="drpStar">
+        <option value="" disabled selected>Select min start</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <input id="txtPrice" type="number">
+      <input id="btnFilter" type="button" value="Filter">
+    </div>
+    <div class="container hotel-container"></div>
+    <script async src="../node_modules/swiper/js/swiper.min.js"></script>
+    <script async src="../node_modules/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
   </body>
 </html>
