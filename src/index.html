@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="container filter-container">
-      <select id="drpStar">
+      <select id="drpStar" class="form-control">
         <option value="" disabled selected>Select min start</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -18,8 +18,8 @@
         <option value="4">4</option>
         <option value="5">5</option>
       </select>
-      <input id="txtPrice" type="number">
-      <input id="btnFilter" type="button" value="Filter">
+      <input id="txtPrice" class="form-control" type="number" placeholder="Max price">
+      <button id="btnFilter" class="btn btn-filter">Search <i class="fa fa-search"></i></button>
     </div>
     <div class="container hotel-container"></div>
     <script async src="../node_modules/swiper/js/swiper.min.js"></script>

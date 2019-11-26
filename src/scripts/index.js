@@ -13,29 +13,26 @@ const myLazyLoad = new LazyLoad({
   },
 });
 
-const render = (template, selector) => {
-	var node = document.querySelector(selector);
-	if (!node) return;
-	node.innerHTML = template;
-};
-
 const addHotelsToDOM = hotels => {
-  let template = ''
+  const hotelContainer = document.querySelector('.hotel-container');
   const starTotal = 5;
 
   if (Array.isArray(hotels) && hotels.length > 0) {
+    // remove all child elements of hotel container before append new hotel
+    while (hotelContainer.firstChild) {
+      hotelContainer.removeChild(hotelContainer.firstChild);
+    }
+
     hotels.map((hotel, index) => {
       const starPercentage = (hotel.stars / starTotal) * 100;
       const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
       let images = ''
 
       if (hotel.images.length > 0) {
-        hotel.images.map(image => images += `<a href="${image}" data-lightbox="${hotel.name}"><img data-src="${image}" src="./src/images/placeholder-1-1.jpg" data-lightbox="ss" alt="${hotel.name}" /></a>`)
-      } else {
-        images = '<div>No images</div>'
+        hotel.images.map(image => images += `<a href="${image}" data-lightbox="${hotel.name}"><img data-src="${image}" src="./src/images/placeholder-1-1.jpg" onerror="this.src='./src/images/placeholder-1-1.jpg';" data-lightbox="hotel-images" alt="${hotel.name}" /></a>`)
       }
 
-      template += `
+      hotelContainer.insertAdjacentHTML('beforeend', `
         <div class="hotel-item">
           <div class="hotel-item__wrapper">
             <div class="hotel-item__thumbnail">
@@ -88,18 +85,16 @@ const addHotelsToDOM = hotels => {
             </div>
           </div>
         </div>
-        `;
+        `);
     });
   } else {
-    template = `
+    hotelContainer.insertAdjacentHTML('beforeend', `
       <div class="error-container">
         <h4>The ship sinks! Reflesh the page.</h4>
         <img src="./src/images/error.gif" />
       </div>
-    `
+    `);
   }
-  // render hotels
-  render(template, '.hotel-container')
   // update lazyload after render the hotels
   myLazyLoad.update();
 
@@ -168,10 +163,10 @@ const addHotelsToDOM = hotels => {
     }
     // to change quick look tabs
     else if (tabs.includes(elm)) {
-      const selector = elm.getAttribute('data-target');
-      const ss = document.querySelector(selector)
-      ss.closest('.hotel-item').querySelector('.tab.active').classList.remove('active')
-      ss.classList.add('active')
+      const target = elm.getAttribute('data-target');
+      const selector = document.querySelector(target)
+      selector.closest('.hotel-item').querySelector('.tab.active').classList.remove('active')
+      selector.classList.add('active')
     }
   }, false);
 
@@ -201,5 +196,5 @@ const filterBtn = document.getElementById('btnFilter')
 filterBtn.addEventListener('click', async (event) => {
   const filterStart = document.getElementById('drpStar')
   const filterPrice = document.getElementById('txtPrice')
-  addHotelsToDOM(await getHotels({ min_stars: filterStart.value, price: filterPrice.value }));
+  addHotelsToDOM(await getHotels({ min_stars: filterStart.value, max_price: filterPrice.value }));
 })
