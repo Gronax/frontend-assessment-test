@@ -193,8 +193,15 @@ main();
 
 // filter hotels
 const filterBtn = document.getElementById('btnFilter')
+
 filterBtn.addEventListener('click', async (event) => {
   const filterStart = document.getElementById('drpStar')
   const filterPrice = document.getElementById('txtPrice')
-  addHotelsToDOM(await getHotels({ min_stars: filterStart.value, max_price: filterPrice.value }));
+
+  let payload = {}
+
+  filterStart.value ? payload.min_stars = filterStart.value : null
+  filterPrice.value ? payload.max_price = filterPrice.value : null
+
+  addHotelsToDOM(await getHotels(payload));
 })
